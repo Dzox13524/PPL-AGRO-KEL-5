@@ -1,0 +1,69 @@
+@import 'tailwindcss';
+
+@source '../views/**/*.blade.php';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@keyframes floatBlob {
+    0%   { transform: translate(0,0) scale(1); }
+    100% { transform: translate(30px,20px) scale(1.08); }
+}
+
+@keyframes pulseGlow {
+    0%   { transform: translate(-50%,-50%) scale(1);    opacity: 0.8; }
+    100% { transform: translate(-50%,-50%) scale(1.12); opacity: 1; }
+}
+
+@keyframes cardEntrance {
+    0%   { opacity: 0; transform: translateY(28px) scale(0.96); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes stepSlideIn {
+    0%   { opacity: 0; transform: translateX(12px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes stepSlideBack {
+    0%   { opacity: 0; transform: translateX(-12px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes shakeError {
+    0%,100% { transform: translateX(0); }
+    20%     { transform: translateX(-6px); }
+    40%     { transform: translateX(6px); }
+    60%     { transform: translateX(-4px); }
+    80%     { transform: translateX(4px); }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+/* Blob delay utilities */
+.animation-delay-4 { animation-delay: -4s; }
+.animation-delay-8 { animation-delay: -8s; }
+
+/* Step content hidden/shown */
+.step-content       { display: none; animation: var(--animate-step-in); }
+.step-content.active{ display: block; }
+.step-content.slide-back { animation: var(--animate-step-back); }
+
+/* Error shown state */
+.error-msg          { display: none; animation: var(--animate-shake); }
+.error-msg.show     { display: flex; }
+
+/* Success overlay */
+.success-overlay        { display: none; animation: var(--animate-fade-in); }
+.success-overlay.show   { display: flex; }
+
+/* Loading button state */
+.input-btn.loading .btn-arrow   { display: none; }
+.input-btn .btn-spinner         { display: none; }
+.input-btn.loading .btn-spinner { display: block; }
