@@ -1,6 +1,6 @@
 @extends('layouts.admin', ['active' => 'karyawan'])
 
-@section('title', 'Manajemen Akun Karyawan — Hidara')
+@section('title', 'Manajemen Akun Karyawan')
 
 @section('content')
 <style>
@@ -34,20 +34,17 @@
 </style>
 
 <div class="max-w-[1400px] mx-auto space-y-6">
-    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+    <div class="flex items-center justify-between gap-3 sm:gap-4">
         <div>
-            <h1 class="text-2xl font-bold text-gray-900 tracking-tight">Manajemen Akun Karyawan</h1>
-            <p class="text-[13px] text-gray-500 mt-1 max-w-2xl leading-relaxed">
-                Kelola kredensial akses, hak peran teknisi, dan status aktif staf operasional farm dengan standar keamanan biometrik IoT &amp; role-based control.
-            </p>
+            <h1 class="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">Manajemen Akun Karyawan</h1>
         </div>
         <div class="shrink-0">
             <button type="button"
                     id="btnTambahAkun"
                     onclick="openDrawer('tambah')"
                     style="background-color: #0e5f38;"
-                    class="inline-flex items-center gap-2 hover:opacity-95 text-white text-[13px] font-semibold px-4 py-2.5 rounded-xl shadow-sm transition active:scale-95 cursor-pointer">
-                <img src="/icons/icon_add_user.png" alt="Tambah Akun" class="w-4 h-4 object-contain invert brightness-0">
+                    class="inline-flex items-center gap-1.5 sm:gap-2 hover:opacity-95 text-white text-xs sm:text-[13px] font-semibold px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl shadow-sm transition active:scale-95 cursor-pointer">
+                <img src="/icons/icon_add_user.png" alt="Tambah Akun" class="w-3.5 h-3.5 sm:w-4 sm:h-4 object-contain invert brightness-0">
                 <span>Tambah Akun</span>
             </button>
         </div>
@@ -72,7 +69,7 @@
             <p class="text-xs text-gray-400 mt-1.5">Semua akun terverifikasi 2FA</p>
         </div>
     </div>
-    <div class="bg-white rounded-2xl border border-gray-100 shadow-xs p-6 space-y-4">
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-xs p-4 sm:p-6 space-y-4">
         {{-- Input Pencarian --}}
         <div class="relative">
             <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
@@ -83,16 +80,15 @@
             </span>
             <input type="text"
                    id="searchInput"
-                   placeholder="Cari karyawan atau ID staf..."
                    class="w-full bg-[#f1f5f9]/70 hover:bg-[#f1f5f9] focus:bg-white border border-transparent focus:border-emerald-500 text-[13.5px] text-gray-800 placeholder-gray-400 pl-11 pr-4 py-3 rounded-xl transition-all outline-none">
         </div>
 
         {{-- Tabel List Akun --}}
         <div class="overflow-hidden">
             {{-- Header Tabel --}}
-            <div class="bg-[#f8fafc] text-gray-500 font-semibold text-[11px] tracking-wider uppercase rounded-xl py-3 px-6 flex justify-between items-center">
+            <div class="bg-[#f8fafc] text-gray-500 font-semibold text-[11px] tracking-wider uppercase rounded-xl py-3 px-4 sm:px-6 flex justify-between items-center">
                 <span>USERNAME</span>
-                <span class="pr-6">TINDAKAN</span>
+                <span>TINDAKAN</span>
             </div>
 
             {{-- Container Baris Akun --}}
@@ -103,11 +99,11 @@
 
         {{-- Footer Tabel & Pagination --}}
         <div class="pt-3 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-xs">
-            <span id="paginationInfo" class="text-gray-500">
+            <span id="paginationInfo" class="text-gray-500 text-center sm:text-left">
                 Menampilkan 5 dari 8 akun terdaftar
             </span>
 
-            <div class="flex items-center gap-1.5 self-end sm:self-auto">
+            <div class="flex items-center justify-center sm:justify-end gap-1.5 w-full sm:w-auto">
                 <button type="button"
                         id="btnPrevPage"
                         class="px-2.5 py-1 text-gray-400 hover:text-gray-700 font-medium transition cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
@@ -139,7 +135,7 @@
      aria-labelledby="drawerTitle">
 
     {{-- Drawer Header --}}
-    <div class="flex items-center justify-between p-6 border-b border-gray-100">
+    <div class="flex items-center justify-between p-4 sm:p-6 border-b border-gray-100">
         <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center shrink-0">
                 <img id="drawerHeaderIcon" src="/icons/icon_add_user.png" alt="Tambah Akun" class="w-5 h-5 object-contain">
@@ -165,7 +161,7 @@
     </div>
 
     {{-- Drawer Body: Form Inputs --}}
-    <form id="accountForm" class="flex-1 overflow-y-auto p-6 space-y-5" onsubmit="return false;">
+    <form id="accountForm" class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5" onsubmit="return false;">
         <input type="hidden" id="formMode" value="tambah">
         <input type="hidden" id="editAccountId" value="">
 
@@ -181,7 +177,6 @@
                 <input type="text"
                        id="inputUsername"
                        required
-                       placeholder="Masukkan username baru"
                        class="w-full bg-[#f1f5f9]/70 hover:bg-[#f1f5f9] focus:bg-white border border-transparent focus:border-emerald-500 text-[13.5px] text-gray-800 placeholder-gray-400 pl-10 pr-4 py-2.5 rounded-xl transition-all outline-none">
             </div>
         </div>
@@ -197,7 +192,6 @@
                 </span>
                 <input type="password"
                        id="inputPassword"
-                       placeholder="Minimal 8 karakter unik..."
                        class="w-full bg-[#f1f5f9]/70 hover:bg-[#f1f5f9] focus:bg-white border border-transparent focus:border-emerald-500 text-[13.5px] text-gray-800 placeholder-gray-400 pl-10 pr-10 py-2.5 rounded-xl transition-all outline-none">
                 {{-- Tombol Toggle Lihat Sandi --}}
                 <button type="button"
@@ -228,7 +222,7 @@
     </form>
 
     {{-- Drawer Footer: Aksi Batal & Simpan --}}
-    <div class="p-6 border-t border-gray-100 flex items-center justify-end gap-3 bg-white">
+    <div class="p-4 sm:p-6 border-t border-gray-100 flex items-center justify-end gap-3 bg-white">
         <button type="button"
                 id="btnBatal"
                 onclick="closeDrawer()"
@@ -242,17 +236,6 @@
             <span id="btnSimpanText">Tambah Akun</span>
         </button>
     </div>
-</div>
-
-{{-- Toast Notification --}}
-<div id="toastNotification"
-     class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-3 bg-gray-900 text-white text-xs px-4 py-3 rounded-xl shadow-lg pointer-events-none">
-    <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
-        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="20 6 9 17 4 12"></polyline>
-        </svg>
-    </div>
-    <span id="toastMessage">Operasi berhasil</span>
 </div>
 
 @push('scripts')
@@ -366,19 +349,24 @@
                 `;
             } else {
                 tableBody.innerHTML = currentItems.map(acc => `
-                    <div class="flex items-center justify-between py-4 px-6 hover:bg-gray-50/70 transition group">
-                        <div class="flex items-center gap-3">
-                            <span class="text-[13.5px] font-medium ${acc.active ? 'text-gray-800' : 'text-gray-400 line-through'}">
-                                ${escapeHtml(acc.username)}
-                            </span>
-                            ${!acc.active ? '<span class="text-[10px] font-semibold text-rose-500 bg-rose-50 px-2 py-0.5 rounded-md">Nonaktif</span>' : ''}
+                    <div class="flex items-center justify-between py-3 sm:py-3.5 px-3 sm:px-6 hover:bg-gray-50/70 transition group gap-2 sm:gap-3">
+                        <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                            <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-emerald-50 text-[#147a46] flex items-center justify-center font-bold text-xs shrink-0 uppercase select-none">
+                                ${escapeHtml(acc.username.charAt(0))}
+                            </div>
+                            <div class="min-w-0 flex-1">
+                                <span class="text-[13px] sm:text-[13.5px] font-medium block truncate ${acc.active ? 'text-gray-800' : 'text-gray-400 line-through'}" title="${escapeHtml(acc.username)}">
+                                    ${escapeHtml(acc.username)}
+                                </span>
+                                ${!acc.active ? '<span class="inline-block text-[10px] font-semibold text-rose-500 bg-rose-50 px-1.5 py-0.5 rounded mt-0.5">Nonaktif</span>' : ''}
+                            </div>
                         </div>
-                        <div class="flex items-center gap-2.5 text-gray-400">
+                        <div class="flex items-center gap-1 sm:gap-2 text-gray-400 shrink-0">
                             {{-- Tombol Edit --}}
                             <button type="button"
                                     data-edit-id="${acc.id}"
                                     title="Edit Akun"
-                                    class="btn-action-edit p-1.5 hover:bg-emerald-50 rounded-lg transition cursor-pointer">
+                                    class="btn-action-edit p-1.5 hover:bg-emerald-50 rounded-lg transition cursor-pointer active:scale-95">
                                 <img src="/icons/icon_edit.png" alt="Edit" class="w-4 h-4 object-contain opacity-60 hover:opacity-100 transition pointer-events-none">
                             </button>
 
@@ -386,7 +374,7 @@
                             <button type="button"
                                     data-lock-id="${acc.id}"
                                     title="${acc.active ? 'Kunci / Nonaktifkan Akun' : 'Aktifkan Akun'}"
-                                    class="btn-action-lock p-1.5 ${acc.active ? 'hover:bg-amber-50' : 'bg-amber-50'} rounded-lg transition cursor-pointer">
+                                    class="btn-action-lock p-1.5 ${acc.active ? 'hover:bg-amber-50' : 'bg-amber-50'} rounded-lg transition cursor-pointer active:scale-95">
                                 <img src="/icons/icon_lock.png" alt="Kunci" class="w-4 h-4 object-contain ${acc.active ? 'opacity-60 hover:opacity-100' : 'opacity-100'} transition pointer-events-none">
                             </button>
 
@@ -394,7 +382,7 @@
                             <button type="button"
                                     data-delete-id="${acc.id}"
                                     title="Hapus Akun"
-                                    class="btn-action-delete p-1.5 hover:bg-rose-50 rounded-lg transition cursor-pointer">
+                                    class="btn-action-delete p-1.5 hover:bg-rose-50 rounded-lg transition cursor-pointer active:scale-95">
                                 <img src="/icons/icon_trash.png" alt="Hapus" class="w-4 h-4 object-contain opacity-60 hover:opacity-100 transition pointer-events-none">
                             </button>
                         </div>
@@ -437,7 +425,7 @@
                 }
                 passwordLabel.innerHTML = 'Kata Sandi Awal <span class="text-rose-500">*</span>';
                 inputPassword.required = true;
-                inputPassword.placeholder = 'Minimal 8 karakter unik...';
+                inputPassword.placeholder = '';
                 btnSimpanText.textContent = 'Tambah Akun';
 
                 editAccountId.value = '';
@@ -452,7 +440,7 @@
                 }
                 passwordLabel.innerHTML = 'Kata Sandi Baru';
                 inputPassword.required = false;
-                inputPassword.placeholder = 'Kosongkan jika tidak diubah...';
+                inputPassword.placeholder = '';
                 btnSimpanText.textContent = 'Simpan Perubahan';
 
                 editAccountId.value = account.id;

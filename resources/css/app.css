@@ -67,3 +67,12 @@
 .input-btn.loading .btn-arrow   { display: none; }
 .input-btn .btn-spinner         { display: none; }
 .input-btn.loading .btn-spinner { display: block; }
+
+/* Hide scrollbar for touch tabs */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}

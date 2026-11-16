@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="Login ke Hidara - Sistem cerdas pertanian hidroponik dan analitik budidaya selada presisi tinggi.">
     <title>Login — Hidara</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,38 +22,38 @@
 
         {{-- Center radial glow --}}
         <div class="absolute rounded-full pointer-events-none animate-[pulseGlow_5s_ease-in-out_infinite_alternate]"
-             style="top:50%; left:50%; transform:translate(-50%,-50%); width:600px; height:600px;
+             style="top:50%; left:50%; transform:translate(-50%,-50%); width:min(600px, 90vw); height:min(600px, 90vw);
                     background: radial-gradient(circle, rgba(26,158,95,0.18) 0%, rgba(26,158,95,0.08) 40%, transparent 70%);">
         </div>
 
         {{-- Blob 1 --}}
-        <div class="absolute rounded-full opacity-45 animate-[floatBlob_12s_ease-in-out_infinite_alternate]"
-             style="width:420px; height:420px; top:-100px; left:-120px; filter:blur(80px);
+        <div class="absolute rounded-full opacity-45 animate-[floatBlob_12s_ease-in-out_infinite_alternate] w-[260px] h-[260px] sm:w-[420px] sm:h-[420px]"
+             style="top:-80px; left:-100px; filter:blur(70px);
                     background: radial-gradient(circle, #a8e6c8, #c5f0db);">
         </div>
 
         {{-- Blob 2 --}}
-        <div class="absolute rounded-full opacity-45 animation-delay-4 animate-[floatBlob_12s_ease-in-out_infinite_alternate]"
-             style="width:320px; height:320px; bottom:-60px; right:-80px; filter:blur(80px);
+        <div class="absolute rounded-full opacity-45 animation-delay-4 animate-[floatBlob_12s_ease-in-out_infinite_alternate] w-[220px] h-[220px] sm:w-[320px] sm:h-[320px]"
+             style="bottom:-50px; right:-60px; filter:blur(70px);
                     background: radial-gradient(circle, #b8f0d5, #d4f7e8);">
         </div>
 
         {{-- Blob 3 --}}
-        <div class="absolute rounded-full opacity-45 animation-delay-8 animate-[floatBlob_12s_ease-in-out_infinite_alternate]"
-             style="width:200px; height:200px; top:40%; left:10%; filter:blur(80px);
+        <div class="absolute rounded-full opacity-45 animation-delay-8 animate-[floatBlob_12s_ease-in-out_infinite_alternate] w-[160px] h-[160px] sm:w-[200px] sm:h-[200px]"
+             style="top:40%; left:10%; filter:blur(70px);
                     background: radial-gradient(circle, #c8f5e2, #e0faf0);">
         </div>
     </div>
 
     {{-- ── Page ── --}}
-    <main class="relative z-10 min-h-screen flex items-center justify-center px-6 py-8">
+    <main class="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 py-6 sm:py-8">
         <div class="w-full max-w-sm text-center animate-[cardEntrance_0.6s_cubic-bezier(0.34,1.56,0.64,1)_both]">
 
             {{-- Title --}}
-            <h1 class="text-[26px] font-semibold tracking-tight text-[#1a2e24] mb-2">
+            <h1 class="text-2xl sm:text-[26px] font-semibold tracking-tight text-[#1a2e24] mb-2">
                 Login to <span class="text-primary font-bold">Hidara</span>
             </h1>
-            <p class="text-[14px] text-gray-500 leading-relaxed max-w-70 mx-auto mb-7">
+            <p class="text-[13px] sm:text-[14px] text-gray-500 leading-relaxed max-w-70 mx-auto mb-6 sm:mb-7">
                 Sistem cerdas pertanian hidroponik dan analitik budidaya selada presisi tinggi.
             </p>
 
@@ -99,7 +99,7 @@
                                           text-[14px] text-[#1a2e24] placeholder-[#b0ccbe] outline-none
                                           transition-all duration-200
                                           focus:border-[#1a9e5f] focus:ring-3 focus:ring-[rgba(26,158,95,0.12)]"
-                                   placeholder="Username" autocomplete="username" autofocus required
+                                   placeholder="Username" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" autofocus required
                                    aria-label="Masukkan username">
 
                             {{-- Next button --}}
@@ -132,15 +132,18 @@
                         </div>
 
                         {{-- Hint --}}
-                        <p class="flex items-center justify-center gap-1.5 mt-3 text-[13px] text-[#7aab90]">
-                            Tekan
-                            <kbd class="inline-flex items-center gap-1 px-2 py-0.5
-                                        bg-white/90 border border-[#d0e8db] rounded-md text-[11.5px] font-semibold
-                                        text-[#4a7a62] shadow-sm font-sans">
-                                Enter
-                                <img src="/icons/icon_enter.png" alt="enter" class="w-3.5 h-3.5 object-contain opacity-75">
-                            </kbd>
-                            atau panah untuk lanjut
+                        <p class="flex items-center justify-center gap-1.5 mt-3 text-[12.5px] sm:text-[13px] text-[#7aab90]">
+                            <span class="hidden sm:inline-flex items-center gap-1">
+                                Tekan
+                                <kbd class="inline-flex items-center gap-1 px-2 py-0.5
+                                            bg-white/90 border border-[#d0e8db] rounded-md text-[11.5px] font-semibold
+                                            text-[#4a7a62] shadow-sm font-sans">
+                                    Enter
+                                    <img src="/icons/icon_enter.png" alt="enter" class="w-3.5 h-3.5 object-contain opacity-75">
+                                </kbd>
+                                atau
+                            </span>
+                            <span>panah untuk lanjut</span>
                         </p>
                     </div>
 
@@ -215,24 +218,27 @@
                         </div>
 
                         {{-- Hint --}}
-                        <p class="flex items-center justify-center gap-1.5 mt-3 text-[13px] text-[#7aab90]">
-                            Tekan
-                            <kbd class="inline-flex items-center gap-1 px-2 py-0.5
-                                        bg-white/90 border border-[#d0e8db] rounded-md text-[11.5px] font-semibold
-                                        text-[#4a7a62] shadow-sm font-sans">
-                                Enter
-                                <img src="/icons/icon_enter.png" alt="enter" class="w-3.5 h-3.5 object-contain opacity-75">
-                            </kbd>
-                            untuk masuk
+                        <p class="flex items-center justify-center gap-1.5 mt-3 text-[12.5px] sm:text-[13px] text-[#7aab90]">
+                            <span class="hidden sm:inline-flex items-center gap-1">
+                                Tekan
+                                <kbd class="inline-flex items-center gap-1 px-2 py-0.5
+                                            bg-white/90 border border-[#d0e8db] rounded-md text-[11.5px] font-semibold
+                                            text-[#4a7a62] shadow-sm font-sans">
+                                    Enter
+                                    <img src="/icons/icon_enter.png" alt="enter" class="w-3.5 h-3.5 object-contain opacity-75">
+                                </kbd>
+                                atau
+                            </span>
+                            <span>panah untuk masuk</span>
                         </p>
 
                         {{-- Back --}}
                         <button type="button" id="btnBack"
-                                class="inline-flex items-center gap-1.5 mt-3.5 text-[13px]
-                                       text-[#7aab90] bg-transparent border-none cursor-pointer font-sans
-                                       transition-colors duration-200 hover:text-[#1a9e5f]"
+                                class="inline-flex items-center gap-1.5 mt-3.5 py-1 px-3 text-[13px]
+                                       text-[#7aab90] hover:bg-white/60 rounded-full cursor-pointer font-sans
+                                       transition-all duration-200 hover:text-[#1a9e5f] active:scale-95"
                                 aria-label="Kembali ke langkah username">
-                            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                 <path d="M19 12H5M12 19l-7-7 7-7"/>
                             </svg>
                             Kembali

@@ -1,23 +1,23 @@
 @extends('layouts.admin', ['active' => 'dashboard'])
 
-@section('title', 'Dashboard — Hidara')
+@section('title', 'Dashboard')
 
 @section('content')
 <div class="max-w-[1400px] mx-auto space-y-6">
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div class="flex items-center justify-between gap-3 sm:gap-4">
         <div>
-            <h1 class="text-2xl font-bold text-gray-900 tracking-tight">Selamat Datang</h1>
+            <h1 class="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">Selamat Datang</h1>
         </div>
-        <div class="flex items-center gap-3">
+        <div class="shrink-0">
             {{-- Unduh Ringkasan --}}
             <button type="button"
-                    class="inline-flex items-center gap-2 bg-white border border-gray-200 text-gray-700 text-xs font-semibold px-4 py-2.5 rounded-lg shadow-xs hover:bg-gray-50 transition active:scale-95 cursor-pointer">
-                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    class="inline-flex items-center gap-1.5 sm:gap-2 bg-white border border-gray-200 text-gray-700 text-xs font-semibold px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg shadow-xs hover:bg-gray-50 transition active:scale-95 cursor-pointer">
+                <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                     <polyline points="7 10 12 15 17 10"/>
                     <line x1="12" y1="15" x2="12" y2="3"/>
                 </svg>
-                Unduh Ringkasan
+                <span>Unduh Ringkasan</span>
             </button>
         </div>
     </div>
@@ -84,7 +84,7 @@
     {{-- ═══════════════════════════════════════════
          Grafik & Riwayat Pertumbuhan Tanaman
     ═══════════════════════════════════════════ --}}
-    <div class="bg-white rounded-xl border border-gray-100 shadow-xs p-6">
+    <div class="bg-white rounded-xl border border-gray-100 shadow-xs p-4 sm:p-6">
         {{-- Section Header --}}
         <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-5">
             <div>
@@ -97,13 +97,13 @@
                     <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
                     +12% Rata-rata Mingguan
                 </span>
-                {{-- Pilih Bedeng --}}
-                <div class="flex items-center gap-1.5">
-                    <div class="inline-flex items-center bg-gray-50 border border-gray-200 rounded-lg p-0.5 gap-0.5">
-                        <button type="button" class="bedeng-tab text-[11px] font-semibold px-3 py-1.5 rounded-md bg-[#137a46] text-white shadow-sm transition" data-bedeng="a01">Bedeng A-01</button>
-                        <button type="button" class="bedeng-tab text-[11px] font-medium px-3 py-1.5 rounded-md text-gray-600 hover:bg-white hover:shadow-xs transition" data-bedeng="a02">Bedeng A-02</button>
-                        <button type="button" class="bedeng-tab text-[11px] font-medium px-3 py-1.5 rounded-md text-gray-600 hover:bg-white hover:shadow-xs transition" data-bedeng="b01">Bedeng B-01</button>
-                        <button type="button" class="bedeng-tab text-[11px] font-medium px-3 py-1.5 rounded-md text-gray-600 hover:bg-white hover:shadow-xs transition" data-bedeng="b02">Bedeng B-02</button>
+                {{-- Pilih Bedeng Tabs (Scrollable on small screens) --}}
+                <div class="w-full sm:w-auto overflow-x-auto no-scrollbar">
+                    <div class="inline-flex items-center bg-gray-50 border border-gray-200 rounded-lg p-0.5 gap-0.5 min-w-max">
+                        <button type="button" class="bedeng-tab shrink-0 text-[11px] font-semibold px-3 py-1.5 rounded-md bg-[#137a46] text-white shadow-sm transition cursor-pointer" data-bedeng="a01">Bedeng A-01</button>
+                        <button type="button" class="bedeng-tab shrink-0 text-[11px] font-medium px-3 py-1.5 rounded-md text-gray-600 hover:bg-white hover:shadow-xs transition cursor-pointer" data-bedeng="a02">Bedeng A-02</button>
+                        <button type="button" class="bedeng-tab shrink-0 text-[11px] font-medium px-3 py-1.5 rounded-md text-gray-600 hover:bg-white hover:shadow-xs transition cursor-pointer" data-bedeng="b01">Bedeng B-01</button>
+                        <button type="button" class="bedeng-tab shrink-0 text-[11px] font-medium px-3 py-1.5 rounded-md text-gray-600 hover:bg-white hover:shadow-xs transition cursor-pointer" data-bedeng="b02">Bedeng B-02</button>
                     </div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
         {{-- Chart + Stats Grid --}}
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {{-- Chart Area (2/3) --}}
-            <div class="lg:col-span-2">
+            <div class="lg:col-span-2 min-w-0">
                 <div class="flex items-center gap-2 mb-3">
                     <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold text-emerald-700">
                         <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
@@ -120,33 +120,34 @@
                     </span>
                 </div>
 
-                {{-- SVG Chart --}}
-                <div class="relative w-full" style="height: 240px;">
-                    <svg id="growthChart" viewBox="0 0 600 240" class="w-full h-full" preserveAspectRatio="xMidYMid meet">
-                        {{-- Grid Lines --}}
-                        <defs>
-                            <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stop-color="#1a9e5f" stop-opacity="0.15"/>
-                                <stop offset="100%" stop-color="#1a9e5f" stop-opacity="0.01"/>
-                            </linearGradient>
-                        </defs>
+                {{-- SVG Chart Container with scroll support on narrow mobile --}}
+                <div class="overflow-x-auto no-scrollbar -mx-2 px-2 sm:mx-0 sm:px-0">
+                    <div class="relative w-full min-w-[460px] sm:min-w-0" style="height: 240px;">
+                        <svg id="growthChart" viewBox="0 0 600 240" class="w-full h-full" preserveAspectRatio="xMidYMid meet">
+                            {{-- Grid Lines --}}
+                            <defs>
+                                <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#1a9e5f" stop-opacity="0.15"/>
+                                    <stop offset="100%" stop-color="#1a9e5f" stop-opacity="0.01"/>
+                                </linearGradient>
+                            </defs>
 
-                        {{-- Horizontal Grid --}}
-                        <line x1="50" y1="30" x2="550" y2="30" stroke="#f1f5f9" stroke-width="1"/>
-                        <line x1="50" y1="70" x2="550" y2="70" stroke="#f1f5f9" stroke-width="1"/>
-                        <line x1="50" y1="110" x2="550" y2="110" stroke="#f1f5f9" stroke-width="1"/>
-                        <line x1="50" y1="150" x2="550" y2="150" stroke="#f1f5f9" stroke-width="1"/>
-                        <line x1="50" y1="190" x2="550" y2="190" stroke="#f1f5f9" stroke-width="1"/>
+                            {{-- Horizontal Grid --}}
+                            <line x1="50" y1="30" x2="550" y2="30" stroke="#f1f5f9" stroke-width="1"/>
+                            <line x1="50" y1="70" x2="550" y2="70" stroke="#f1f5f9" stroke-width="1"/>
+                            <line x1="50" y1="110" x2="550" y2="110" stroke="#f1f5f9" stroke-width="1"/>
+                            <line x1="50" y1="150" x2="550" y2="150" stroke="#f1f5f9" stroke-width="1"/>
+                            <line x1="50" y1="190" x2="550" y2="190" stroke="#f1f5f9" stroke-width="1"/>
 
-                        {{-- Y-axis Labels --}}
-                        <text x="40" y="34" text-anchor="end" class="text-[9px] fill-gray-400">25</text>
-                        <text x="40" y="74" text-anchor="end" class="text-[9px] fill-gray-400">20</text>
-                        <text x="40" y="114" text-anchor="end" class="text-[9px] fill-gray-400">15</text>
-                        <text x="40" y="154" text-anchor="end" class="text-[9px] fill-gray-400">10</text>
-                        <text x="40" y="194" text-anchor="end" class="text-[9px] fill-gray-400">5</text>
+                            {{-- Y-axis Labels --}}
+                            <text x="40" y="34" text-anchor="end" class="text-[9px] fill-gray-400">25</text>
+                            <text x="40" y="74" text-anchor="end" class="text-[9px] fill-gray-400">20</text>
+                            <text x="40" y="114" text-anchor="end" class="text-[9px] fill-gray-400">15</text>
+                            <text x="40" y="154" text-anchor="end" class="text-[9px] fill-gray-400">10</text>
+                            <text x="40" y="194" text-anchor="end" class="text-[9px] fill-gray-400">5</text>
 
-                        {{-- Standar Siklus (dashed reference line) --}}
-                        <line x1="50" y1="55" x2="550" y2="55" stroke="#94a3b8" stroke-width="1" stroke-dasharray="6 4"/>
+                            {{-- Standar Siklus (dashed reference line) --}}
+                            <line x1="50" y1="55" x2="550" y2="55" stroke="#94a3b8" stroke-width="1" stroke-dasharray="6 4"/>
 
                         {{-- Area Fill --}}
                         <path d="M 80 185 C 130 178, 160 160, 200 150 C 240 138, 290 110, 330 90 C 370 75, 400 60, 440 50 C 470 42, 510 36, 540 32 L 540 210 L 80 210 Z"
@@ -207,36 +208,38 @@
                         <p class="text-xs font-bold text-gray-900">Log Observasi Lapangan</p>
                         <span class="text-[10px] text-gray-400">Terakhir: Hari ini, 08:30</span>
                     </div>
-                    <table class="w-full text-[11px]">
-                        <thead>
-                            <tr class="border-b border-gray-200">
-                                <th class="text-left text-gray-500 font-medium pb-2 pr-2">Hari</th>
-                                <th class="text-left text-gray-500 font-medium pb-2 pr-2">Tinggi</th>
-                                <th class="text-left text-gray-500 font-medium pb-2 pr-2">Status Daun</th>
-                                <th class="text-right text-gray-500 font-medium pb-2">Petugas</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="border-b border-gray-100">
-                                <td class="py-2 pr-2 font-semibold text-gray-900">H-28</td>
-                                <td class="py-2 pr-2 text-gray-600">23.8 cm</td>
-                                <td class="py-2 pr-2 font-medium text-emerald-600">Daun Lebar & Tegak</td>
-                                <td class="py-2 text-right text-gray-500">Rian T.</td>
-                            </tr>
-                            <tr class="border-b border-gray-100">
-                                <td class="py-2 pr-2 font-semibold text-gray-900">H-21</td>
-                                <td class="py-2 pr-2 text-gray-600">18.4 cm</td>
-                                <td class="py-2 pr-2 font-medium text-emerald-600">Warna Hijau Cerah</td>
-                                <td class="py-2 text-right text-gray-500">Budi S.</td>
-                            </tr>
-                            <tr>
-                                <td class="py-2 pr-2 font-semibold text-gray-900">H-14</td>
-                                <td class="py-2 pr-2 text-gray-600">12.1 cm</td>
-                                <td class="py-2 pr-2 font-medium text-emerald-600">Fase Vegetatif Aktif</td>
-                                <td class="py-2 text-right text-gray-500">Rian T.</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="overflow-x-auto -mx-1 px-1">
+                        <table class="w-full text-[11px] min-w-[280px]">
+                            <thead>
+                                <tr class="border-b border-gray-200">
+                                    <th class="text-left text-gray-500 font-medium pb-2 pr-2">Hari</th>
+                                    <th class="text-left text-gray-500 font-medium pb-2 pr-2">Tinggi</th>
+                                    <th class="text-left text-gray-500 font-medium pb-2 pr-2">Status Daun</th>
+                                    <th class="text-right text-gray-500 font-medium pb-2">Petugas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2 pr-2 font-semibold text-gray-900">H-28</td>
+                                    <td class="py-2 pr-2 text-gray-600">23.8 cm</td>
+                                    <td class="py-2 pr-2 font-medium text-emerald-600">Daun Lebar &amp; Tegak</td>
+                                    <td class="py-2 text-right text-gray-500">Rian T.</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2 pr-2 font-semibold text-gray-900">H-21</td>
+                                    <td class="py-2 pr-2 text-gray-600">18.4 cm</td>
+                                    <td class="py-2 pr-2 font-medium text-emerald-600">Warna Hijau Cerah</td>
+                                    <td class="py-2 text-right text-gray-500">Budi S.</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 pr-2 font-semibold text-gray-900">H-14</td>
+                                    <td class="py-2 pr-2 text-gray-600">12.1 cm</td>
+                                    <td class="py-2 pr-2 font-medium text-emerald-600">Fase Vegetatif Aktif</td>
+                                    <td class="py-2 text-right text-gray-500">Rian T.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -246,13 +249,13 @@
          Status Bedeng Aktif
     ═══════════════════════════════════════════ --}}
     <div class="space-y-3 pt-1">
-        <div class="flex items-center justify-between">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
             <div>
                 <h2 class="text-base font-bold text-gray-900">Status Bedeng Aktif</h2>
                 <p class="text-xs text-gray-500">Ringkasan progres kultivasi dan jadwal panen per unit bedeng hidroponik</p>
             </div>
             <a href="{{ Route::has('admin.stok') ? route('admin.stok') : '/admin/stok' }}"
-               class="text-xs font-semibold text-emerald-600 hover:text-emerald-700 transition inline-flex items-center gap-1">
+               class="text-xs font-semibold text-emerald-600 hover:text-emerald-700 transition inline-flex items-center gap-1 shrink-0">
                 Lihat Semua Bedeng
                 <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
