@@ -1,47 +1,54 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DiagnosisController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\MonitoringController;
+use App\Http\Controllers\PlantController;
+use App\Http\Controllers\PredictionController;
+use App\Http\Controllers\StockController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+$renderProtected = function (Request $request, string $view, bool $ownerOnly = false) {
+    $auth = AuthController::resolveAuthFromRequest($request);
+    if ($auth['token'] === null) {
+        return redirect()->route('login');
+    }
 
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
+    if ($ownerOnly && $auth['role'] !== 'owner') {
+        return redirect()->route('karyawan.tanaman');
+    }
 
-Route::post('/logout', function () {
+    return view($view);
+};
+
+Route::get('/', function (Request $request) {
+    $auth = AuthController::resolveAuthFromRequest($request);
+    if ($auth['token'] !== null) {
+        return redirect(AuthController::dashboardRouteForRole($auth['role']));
+    }
+
     return redirect()->route('login');
-})->name('logout');
-
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/stok', function () {
-        return view('admin.stok.index');
-    })->name('stok');
-
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard.index');
-    })->name('dashboard');
-
-    Route::get('/karyawan', function () {
-        return view('admin.karyawan.index');
-    })->name('karyawan');
 });
 
-Route::prefix('karyawan')->name('karyawan.')->group(function () {
-    Route::get('/tanaman', function () {
-        return view('karyawan.tanaman.index');
-    })->name('tanaman');
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    Route::get('/monitoring', function () {
-        return view('karyawan.monitoring.index');
-    })->name('monitoring');
+Route::prefix('admin')->name('admin.')->group(function () use ($renderProtected) {
+    Route::get('/stok', [StockController::class, 'index'])->name('stok');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/karyawan', [EmployeeController::class, 'index'])->name('karyawan');
+    Route::post('/karyawan', [EmployeeController::class, 'store'])->name('karyawan.store');
+    Route::put('/karyawan/{id}', [EmployeeController::class, 'update'])->name('karyawan.update');
+    Route::delete('/karyawan/{id}', [EmployeeController::class, 'destroy'])->name('karyawan.destroy');
+});
 
-    Route::get('/prediksi', function () {
-        return view('karyawan.prediksi.index');
-    })->name('prediksi');
-
-    Route::get('/diagnosis', function () {
-        return view('karyawan.diagnosis.index');
-    })->name('diagnosis');
+Route::prefix('karyawan')->name('karyawan.')->group(function () use ($renderProtected) {
+    Route::get('/tanaman', [PlantController::class, 'index'])->name('tanaman');
+    Route::get('/monitoring', [MonitoringController::class, 'index'])->name('monitoring');
+    Route::get('/prediksi', [PredictionController::class, 'index'])->name('prediksi');
+    Route::get('/diagnosis', [DiagnosisController::class, 'index'])->name('diagnosis');
 });
