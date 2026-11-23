@@ -360,37 +360,76 @@
             setTimeout(() => usernameInput.focus(), 50);
         }
 
+        /* ── Cookie Helpers ── */
+        function setAuthCookie(name, value, maxAgeSeconds) {
+            const age = Number.isFinite(maxAgeSeconds) && maxAgeSeconds > 0 ? Math.floor(maxAgeSeconds) : 43200;
+            document.cookie = `${name}=${encodeURIComponent(value)}; path=/; max-age=${age}; SameSite=Lax`;
+        }
+
+        function getAuthCookie(name) {
+            const prefix = `${name}=`;
+            const found = document.cookie.split('; ').find(row => row.startsWith(prefix));
+            return found ? decodeURIComponent(found.slice(prefix.length)) : '';
+        }
+
+        function clearAuthCookies() {
+            ['hidara_token', 'hidara_role', 'hidara_user'].forEach(name => {
+                document.cookie = `${name}=; path=/; max-age=0; SameSite=Lax`;
+            });
+        }
+
+        /* ── Fetch POST Login ke FastAPI BE (:8000) ── */
+        async function postLoginToBackend(username, password) {
+            const apiHost = window.location.hostname === '127.0.0.1' ? '127.0.0.1' : 'localhost';
+            const res = await fetch(`http://${apiHost}:8000/api/v1/auth/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            });
+            const data = await res.json().catch(() => ({}));
+            return { res, data };
+        }
+
         /* ── Login ── */
-        function doLogin() {
+        async function doLogin() {
+            const username = usernameInput.value.trim();
             const pw = passwordInput.value;
             if (!pw) { showError(passwordError, passwordErrTxt, 'Password tidak boleh kosong.'); passwordInput.focus(); return; }
 
             hideError(passwordError);
             setLoading(btnLogin, true);
 
-            const formData = new FormData(loginForm);
+            try {
+                const { res, data } = await postLoginToBackend(username, pw);
+                const payload = data?.data || {};
+                const token = payload.access_token;
 
-            fetch(loginForm.action, {
-                method: 'POST',
-                headers: { 'X-CSRF-TOKEN': formData.get('_token') || '', 'Accept': 'application/json' },
-                body: formData,
-            })
-            .then(async res => {
-                const data = await res.json().catch(() => ({}));
-                if (res.ok && data.redirect) {
+                if (res.ok && token) {
+                    const maxAge = Number(payload.expires_in) || 43200;
+                    const role = payload.role || payload.user?.role || 'karyawan';
+
+                    setAuthCookie('hidara_token', token, maxAge);
+                    setAuthCookie('hidara_role', role, maxAge);
+                    if (payload.user) {
+                        setAuthCookie('hidara_user', JSON.stringify(payload.user), maxAge);
+                    }
+
+                    const redirectUrl = role === 'owner' ? '/admin/dashboard' : '/karyawan/tanaman';
                     stepPassword.classList.remove('active');
                     successOverlay.classList.add('show');
-                    setTimeout(() => { window.location.href = data.redirect; }, 1200);
+                    setTimeout(() => { window.location.href = redirectUrl; }, 1200);
                 } else {
                     setLoading(btnLogin, false);
-                    showError(passwordError, passwordErrTxt, data.message || 'Username atau password salah.');
+                    showError(passwordError, passwordErrTxt, data?.message || 'Username atau password salah.');
                     passwordInput.focus(); passwordInput.select();
                 }
-            })
-            .catch(() => {
+            } catch (_) {
                 setLoading(btnLogin, false);
-                showError(passwordError, passwordErrTxt, 'Terjadi kesalahan jaringan. Coba lagi.');
-            });
+                showError(passwordError, passwordErrTxt, 'Tidak dapat terhubung ke Backend API (port 8000).');
+            }
         }
 
         /* ── Events ── */
